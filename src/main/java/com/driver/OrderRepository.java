@@ -70,11 +70,13 @@ public List<String> AllOrderService()
 
  public int orderAssignByPartnerId(String id)
  {
+    if(!PairMap.containsKey(id)) return 0;
     return PairMap.get(id).size();
  }
 
  public List<String> listOfOrderByPartnerId(String id)
  {
+    if(!PairMap.containsKey(id))return new ArrayList<String>();
     return PairMap.get(id);
  }
 
@@ -146,7 +148,7 @@ private String stringTimeFormate(int minute)
 
 
  public void deletePartnerById(String partnerId)
- {
+ { if(!DeliveryPartnerMap.containsKey(partnerId)) return;
     DeliveryPartnerMap.remove(partnerId);
     PairMap.remove(partnerId);
     deleteOrder(PairMap.get(partnerId));
